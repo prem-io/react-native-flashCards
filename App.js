@@ -1,13 +1,14 @@
 import React from 'react'
 import { StyleSheet, Text, View, ScrollView } from 'react-native'
 import Constants from 'expo-constants'
-import DeckList from './components/DeckList'
+import CreateDeck from './components/CreateDeck'
+import DeckCard from './components/DeckCard'
 
 export default function App() {
   return (
     <View style={styles.container}>
       {/* <ScrollView style={styles.scrollView}> */}
-      <DeckList />
+      <CreateDeck />
       {/* </ScrollView> */}
     </View>
   )

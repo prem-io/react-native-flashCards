@@ -1,15 +1,14 @@
 import React from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import * as colors from '../utils/colors'
+import Button from './Button'
 
 function DeckCard() {
   return (
     <View style={styles.card}>
       <Text style={styles.title}>React</Text>
       <Text style={styles.count}>{5} Cards</Text>
-      <TouchableOpacity onPress={() => console.log('Pressed')}>
-        <Text style={styles.button}>View Deck</Text>
-      </TouchableOpacity>
+      <Button onPress={() => console.log('View Deck')}>View Deck</Button>
     </View>
   )
 }
@@ -45,17 +44,6 @@ const styles = StyleSheet.create({
   count: {
     fontSize: 16,
     color: colors.black
-  },
-  button: {
-    padding: 10,
-    paddingRight: 30,
-    paddingLeft: 30,
-    margin: 10,
-    backgroundColor: colors.blue,
-    color: colors.lightgrey,
-    borderRadius: 5,
-    textAlign: 'center',
-    fontSize: 16
   }
 })
 

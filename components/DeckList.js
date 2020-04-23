@@ -3,8 +3,17 @@ import { StyleSheet, FlatList } from 'react-native'
 import DeckCard from './DeckCard'
 
 const DeckList = () => {
+  const decks = getDecks()
+
+  renderItem = ({ item }) => {
+    return <DeckCard {...item} />
+  }
+
   return (
-    <DeckCard />
+    <FlatList
+      data={}
+      renderItem={this.renderItem}
+    />
   )
 }
 
