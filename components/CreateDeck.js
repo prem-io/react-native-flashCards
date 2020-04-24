@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View, TextInput, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from 'react-native'
+import { Text, StyleSheet, View, TextInput, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import * as colors from '../utils/colors'
 import Button from './Button'
 
 export default class CreateDeck extends Component {
   state = {
-    title: '',
-    textTooShort: false,
-    textTooShortNote: "The deck name is too short!"
+    title: ''
   }
 
   handleChangeText = (title) => {
