@@ -23,7 +23,7 @@ export default class CreateDeck extends Component {
               style={styles.input}
               onChangeText={this.handleChangeText}
               placeholder="Deck Title"
-              placeholderTextColor={colors.tailBlue}
+              placeholderTextColor={colors.grey}
               maxLength={15}
             />
             <Text style={styles.charCount}>{title.length}/15</Text>

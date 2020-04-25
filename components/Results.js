@@ -6,17 +6,20 @@ import Button from './Button'
 const Results = () => {
   return (
     <View style={styles.container}>
-      <Image style={{ width: 300, height: 300 }} source={require('../assets/resultCard.jpeg')} />
+      <Image style={{ width: 300, height: 300, alignSelf: 'center' }} source={require('../assets/resultCard.jpeg')} />
       <Text style={styles.text}>You've completed the Quiz.</Text>
       <View style={styles.result}>
-        <Text style={{ fontSize: 16 }}>Total Questions answered</Text>
+        <Text style={{ fontSize: 16 }}>Total Questions answered :</Text>
         <Text style={{ fontSize: 16 }}>{5}</Text>
       </View>
       <View style={styles.result}>
-        <Text style={{ fontSize: 16 }}>Correct Answers</Text>
+        <Text style={{ fontSize: 16 }}>Correct Answers :</Text>
         <Text style={{ fontSize: 16 }}>{4}</Text>
       </View>
-      <Button style={{ backgroundColor: colors.white, color: colors.grey, marginVertical: 40 }} onPress={() => console.log('Back to Deck')}>Back</Button>
+      <View style={{ marginTop: 20 }}>
+        <Button onPress={() => console.log('Restart')}>Restart</Button>
+        <Button style={{ backgroundColor: colors.white, color: colors.grey }} onPress={() => console.log('Back to Deck')}>Back</Button>
+      </View>
     </View >
   )
 }
