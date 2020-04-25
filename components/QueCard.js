@@ -16,6 +16,7 @@ export default QueCard
 
 const styles = StyleSheet.create({
   card: {
+    width: '80%',
     backgroundColor: colors.white,
     paddingVertical: 30,
     paddingHorizontal: 20,

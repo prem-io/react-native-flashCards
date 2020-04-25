@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import * as colors from '../utils/colors'
 
-const Button = ({ children, disable, onPress, style }) => {
+const Button = ({ children, disable, onPress, style = {} }) => {
   return (
     <TouchableOpacity disabled={disable} onPress={onPress}>
       <Text style={[styles.button, { backgroundColor: disable ? colors.disable : colors.blue }, style]}>{children}</Text>
