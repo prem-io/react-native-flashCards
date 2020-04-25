@@ -3,11 +3,11 @@ import { StyleSheet, Text, View } from 'react-native'
 import * as colors from '../utils/colors'
 import { ribColor } from '../utils/helper'
 
-const QueCard = () => {
+const QueCard = ({ que: { question } }) => {
   return (
     <View style={styles.card}>
       <View style={[styles.ribbon, { backgroundColor: ribColor() }]}></View>
-      <Text style={styles.question} numberOfLines={2}>What is the InteractionManager and how is it used?</Text>
+      <Text style={styles.question} numberOfLines={2}>{question}</Text>
     </View>
   )
 }
@@ -16,7 +16,6 @@ export default QueCard
 
 const styles = StyleSheet.create({
   card: {
-    width: '80%',
     backgroundColor: colors.white,
     paddingVertical: 30,
     paddingHorizontal: 20,
@@ -27,10 +26,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.95,
     elevation: 25,
     shadowColor: 'rgba(16, 14, 23, .25)',
-    shadowOffset: {
-      width: 0,
-      height: 3
-    }
+    shadowOffset: { width: 0, height: 3 }
   },
   ribbon: {
     width: 5,

@@ -1,26 +1,54 @@
-import React from 'react'
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import React, { Component } from 'react'
+import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native'
 import QueCard from './QueCard'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import * as colors from '../utils/colors'
 import Button from './Button'
 
-const QueList = () => {
-  return (
-    <View style={styles.container}>
-      <QueCard />
-      <QueCard />
-      <QueCard />
-      <Button style={{ width: 200 }} onPress={() => console.log('Start Quiz')}
-      >Start Quiz</Button>
-      <TouchableOpacity style={styles.floatBtn}>
-        <Icon name="plus" size={25} color={colors.lightgrey} />
-      </TouchableOpacity>
-    </View>
-  )
-}
+export default class QueList extends Component {
 
-export default QueList
+  updateScreenTitle = (title) => {
+    this.props.navigation.setOptions({ title })
+  }
+
+  addCard = () => {
+    const { deck } = this.props.route.params
+    console.log(deck)
+    // this.props.navigation.navigate('QueList', { deck })
+  }
+
+  navigate = (screen) => {
+    const { deck: { questions } } = this.props.route.params
+    this.props.navigation.navigate(screen, { questions })
+  }
+
+  render() {
+    const { deck: { title, questions } } = this.props.route.params
+    this.updateScreenTitle(title)
+
+    return (
+      <View style={styles.container}>
+        <FlatList
+          data={questions}
+          keyExtractor={(item, index) => 'key' + index}
+          renderItem={({ item }) => <QueCard que={item} />}
+        />
+        <Button
+          style={{ width: 150, marginBottom: 15 }}
+          onPress={() => this.navigate('Quiz')}
+        >
+          <Text>Start Quiz</Text>
+        </Button>
+        <TouchableOpacity
+          style={styles.floatBtn}
+          onPress={() => this.navigate('AddQue')}
+        >
+          <Icon name="plus" size={20} color={colors.lightgrey} />
+        </TouchableOpacity>
+      </View>
+    )
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -31,11 +59,11 @@ const styles = StyleSheet.create({
   floatBtn: {
     alignItems: 'center',
     justifyContent: 'center',
-    width: 70,
+    width: 65,
+    height: 65,
     position: 'absolute',
     bottom: 30,
     right: 30,
-    height: 70,
     backgroundColor: colors.blue,
     borderRadius: 100,
   }

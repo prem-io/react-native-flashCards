@@ -17,8 +17,6 @@ import QueCard from './components/QueCard'
 import QueList from './components/QueList'
 import QuizCard from './components/QuizCard'
 import QuizContainer from './components/QuizContainer'
-import NoCards from './components/NoCards'
-import Results from './components/Results'
 
 function AppStatusBar({ backgroundColor, ...props }) {
   return (

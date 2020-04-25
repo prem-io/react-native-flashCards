@@ -10,7 +10,7 @@ function DeckCard({ deck, navigateToDeck }) {
     <View style={styles.card}>
       <Text style={styles.title}>{title}</Text>
       <Text style={styles.cardCount}>{questions.length} Cards</Text>
-      <Button onPress={() => navigateToDeck(deck.title)}>View Deck</Button>
+      <Button onPress={() => navigateToDeck(deck)}>View Deck</Button>
     </View>
   )
 }

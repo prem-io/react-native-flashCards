@@ -11,6 +11,7 @@ export default class QuizCard extends Component {
   }
 
   render() {
+    const { quiz: { question, answer } } = this.props
     return (
       <FlipCard
         friction={6}
@@ -22,14 +23,14 @@ export default class QuizCard extends Component {
       >
         {/* Face Side */}
         <View style={[styles.card]}>
-          <Text style={styles.title} numberOfLines={7}>What is the Interaction Manager and how is it used?</Text>
+          <Text style={styles.title} numberOfLines={7}>{question}</Text>
           <TouchableOpacity style={styles.icon} onPress={() => this.setState({ flip: !this.state.flip })}>
             <Icon name="arrowright" size={25} color={colors.grey} />
           </TouchableOpacity>
         </View>
         {/* Back Side */}
         <View style={[styles.card]}>
-          <Text style={styles.title} numberOfLines={7}>Answer.</Text>
+          <Text style={styles.title} numberOfLines={7}>{answer}</Text>
           <TouchableOpacity style={styles.icon} onPress={() => this.setState({ flip: !this.state.flip })}>
             <Icon name="arrowright" size={25} color={colors.grey} />
           </TouchableOpacity>

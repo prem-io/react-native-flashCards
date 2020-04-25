@@ -21,7 +21,7 @@ const initialData = {
     questions: [
       {
         question: 'JavaScript is considered a weakly typed (or untyped) language?',
-        answer: 'Correct'
+        answer: 'Untyped language'
       },
       {
         question: 'Closure is a combination of a function and lexical environment within which that function was declared?',
@@ -47,8 +47,9 @@ export function getDecks() {
 
 // helper function to get a single deck data
 export function getDeck(title) {
-  return getDecks()
-    .then((decks) => decks[title])
+  return AsyncStorage.getItem(STORAGE_DB_KEY)
+    .then(res => JSON.parse(res))
+    .then(data => data[title])
 }
 
 // helper function to save new deck
