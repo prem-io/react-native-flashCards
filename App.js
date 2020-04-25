@@ -10,11 +10,12 @@ import QueList from './components/QueList'
 import QuizCard from './components/QuizCard'
 import QuizContainer from './components/QuizContainer'
 import NoCards from './components/NoCards'
+import Results from './components/Results'
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <NoCards />
+      <Results />
     </View>
   )
 }
