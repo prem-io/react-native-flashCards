@@ -1,8 +1,8 @@
 import React from 'react'
-import { StyleSheet, Text, View, StatusBar } from 'react-native'
+import { View, StatusBar } from 'react-native'
 import Constants from 'expo-constants'
 import * as colors from './utils/colors'
-import { FontAwesome, Ionicons, FontAwesome5 } from '@expo/vector-icons'
+import { FontAwesome, FontAwesome5 } from '@expo/vector-icons'
 
 import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
@@ -38,6 +38,7 @@ const tabIcon = (tab, color, size) => {
   }
 }
 
+// TabNav config
 const TabNavigatorConfig = {
   navigationOptions: {
     header: null
@@ -49,7 +50,7 @@ const TabNavigatorConfig = {
   }
 }
 
-const MainNav = () => {
+const MainTabNav = () => {
   return (
     <Tab.Navigator {...TabNavigatorConfig}>
       <Tab.Screen
@@ -72,12 +73,67 @@ const MainNav = () => {
   )
 }
 
+const Stack = createStackNavigator()
+
+// StackNav config
+const StackNavigatorConfig = {
+  headerMode: "screen"
+}
+const StackConfig = {
+  MainTabNav: {
+    name: "Home",
+    component: MainTabNav,
+    options: { title: 'Decks', headerShown: false }
+  },
+  AddQue: {
+    name: "AddQue",
+    component: AddQue,
+    options: {
+      title: 'Add Card',
+      headerTintColor: colors.white,
+      headerStyle: { backgroundColor: colors.blue },
+      headerTitleAlign: 'center'
+    }
+  },
+  QueList: {
+    name: "QueList",
+    component: QueList,
+    options: {
+      title: 'Deck Details',
+      headerTintColor: colors.white,
+      headerStyle: { backgroundColor: colors.blue },
+      headerTitleAlign: 'center'
+    }
+  },
+  Quiz: {
+    name: "Quiz",
+    component: QuizContainer,
+    options: {
+      title: 'Quiz',
+      headerTintColor: colors.white,
+      headerStyle: { backgroundColor: colors.blue },
+      headerTitleAlign: 'center'
+    }
+  }
+}
+
+const MainStackNav = () => {
+  return (
+    <Stack.Navigator {...StackNavigatorConfig}>
+      <Stack.Screen {...StackConfig['MainTabNav']} />
+      <Stack.Screen {...StackConfig['AddQue']} />
+      <Stack.Screen {...StackConfig['QueList']} />
+      <Stack.Screen {...StackConfig['Quiz']} />
+    </Stack.Navigator>
+  )
+}
+
 export default function App() {
   return (
     <View style={{ flex: 1 }}>
       <AppStatusBar backgroundColor={colors.blue} barStyle='light-content' />
       <NavigationContainer>
-        <MainNav />
+        <MainStackNav />
       </NavigationContainer>
     </View>
   )

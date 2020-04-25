@@ -1,134 +1,42 @@
-import React from 'react'
-import { StyleSheet, View, FlatList } from 'react-native'
-import DeckCard from './DeckCard'
+import React, { Component } from 'react'
+import { StyleSheet, FlatList } from 'react-native'
 import * as colors from '../utils/colors'
+import DeckCard from './DeckCard'
+import { getDecks } from '../utils/api'
 
-const deckList = {
-  React: {
-    title: 'React',
-    questions: [
-      {
-        question: 'What is React?',
-        answer: 'A library for managing user interfaces'
-      },
-      {
-        question: 'Where do you make Ajax requests in React?',
-        answer: 'The componentDidMount lifecycle event'
-      }
-    ]
-  },
-  JavaScript: {
-    title: 'JavaScript',
-    questions: [
-      {
-        question: 'JavaScript is considered a weakly typed (or untyped) language?',
-        answer: 'Correct'
-      },
-      {
-        question: 'Closure is a combination of a function and lexical environment within which that function was declared?',
-        answer: 'Yes'
-      }
-    ]
-  },
-  Java: {
-    title: 'Java',
-    questions: [
-      {
-        question: 'JavaScript is considered a weakly typed (or untyped) language?',
-        answer: 'Correct'
-      },
-      {
-        question: 'Closure is a combination of a function and lexical environment within which that function was declared?',
-        answer: 'Yes'
-      }
-    ]
-  },
-  Node: {
-    title: 'Node',
-    questions: [
-      {
-        question: 'JavaScript is considered a weakly typed (or untyped) language?',
-        answer: 'Correct'
-      },
-      {
-        question: 'Closure is a combination of a function and lexical environment within which that function was declared?',
-        answer: 'Yes'
-      }
-    ]
-  },
-  Nodee: {
-    title: 'Node',
-    questions: [
-      {
-        question: 'JavaScript is considered a weakly typed (or untyped) language?',
-        answer: 'Correct'
-      },
-      {
-        question: 'Closure is a combination of a function and lexical environment within which that function was declared?',
-        answer: 'Yes'
-      }
-    ]
-  }, Nde: {
-    title: 'Node',
-    questions: [
-      {
-        question: 'JavaScript is considered a weakly typed (or untyped) language?',
-        answer: 'Correct'
-      },
-      {
-        question: 'Closure is a combination of a function and lexical environment within which that function was declared?',
-        answer: 'Yes'
-      }
-    ]
-  }, Noe: {
-    title: 'Node',
-    questions: [
-      {
-        question: 'JavaScript is considered a weakly typed (or untyped) language?',
-        answer: 'Correct'
-      },
-      {
-        question: 'Closure is a combination of a function and lexical environment within which that function was declared?',
-        answer: 'Yes'
-      }
-    ]
-  }, Nod: {
-    title: 'Node',
-    questions: [
-      {
-        question: 'JavaScript is considered a weakly typed (or untyped) language?',
-        answer: 'Correct'
-      },
-      {
-        question: 'Closure is a combination of a function and lexical environment within which that function was declared?',
-        answer: 'Yes'
-      }
-    ]
+export default class DeckList extends Component {
+  state = {
+    deckList: {}
   }
-}
 
-const DeckList = (props) => {
+  componentDidMount() {
+    getDecks().then(res => this.setState({ deckList: res }))
+  }
+
+  //Extracting item key for FlatList rendering
+  _keyExtractor = (item, index) => (index.toString());
+
   //handling navigation routes to redirect user to the deck detail page
-  const navigateToDeck = (deck) => {
-    console.log(deck)
-    // props.navigation.navigate('DeckDetail', { deck })
+  navigateToDeck = (deck) => {
+    this.props.navigation.navigate('QueList', { deck })
   }
 
-  return (
-    <FlatList
-      style={styles.container}
-      data={Object.values(deckList)}
-      renderItem={({ item }) => <DeckCard deck={item} navigateToDeck={navigateToDeck} />}
-    />
-  )
+  render() {
+    return (
+      <FlatList
+        style={styles.container}
+        data={Object.values(this.state.deckList)}
+        keyExtractor={this._keyExtractor}
+        renderItem={({ item }) => <DeckCard deck={item} navigateToDeck={this.navigateToDeck} />}
+      />
+    )
+  }
 }
-
-export default DeckList
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.lightgrey,
+    backgroundColor: colors.green,
     padding: 30
   }
 })

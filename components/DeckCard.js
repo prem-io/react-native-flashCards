@@ -9,7 +9,7 @@ function DeckCard({ deck, navigateToDeck }) {
   return (
     <View style={styles.card}>
       <Text style={styles.title}>{title}</Text>
-      <Text style={styles.count}>{questions.length} Cards</Text>
+      <Text style={styles.cardCount}>{questions.length} Cards</Text>
       <Button onPress={() => navigateToDeck(deck.title)}>View Deck</Button>
     </View>
   )
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 5
   },
-  count: {
+  cardCount: {
     fontSize: 16,
     color: colors.black
   }
