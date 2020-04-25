@@ -1,7 +1,15 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, StatusBar } from 'react-native'
 import Constants from 'expo-constants'
 import * as colors from './utils/colors'
+import { FontAwesome, Ionicons, FontAwesome5 } from '@expo/vector-icons'
+
+import { NavigationContainer } from '@react-navigation/native'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
+import { createStackNavigator } from '@react-navigation/stack'
+
+import DeckList from './components/DeckList'
 import CreateDeck from './components/CreateDeck'
 import DeckCard from './components/DeckCard'
 import AddQue from './components/AddQue'
@@ -12,21 +20,65 @@ import QuizContainer from './components/QuizContainer'
 import NoCards from './components/NoCards'
 import Results from './components/Results'
 
-export default function App() {
+function AppStatusBar({ backgroundColor, ...props }) {
   return (
-    <View style={styles.container}>
-      <Results />
+    <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
+      <StatusBar translucent backgroundColor={backgroundColor} {...props} />
     </View>
   )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    marginTop: Constants.statusBarHeight,
-    alignItems: 'center',
-    backgroundColor: colors.lightgrey,
-    padding: 20
+const Tab = Platform.OS === 'ios' ? createBottomTabNavigator() : createMaterialTopTabNavigator()
+
+const tabIcon = (tab, color, size) => {
+  if (tab === "Decks") {
+    return <FontAwesome5 name={'elementor'} size={size} color={color} />
+  } else if (tab === "Add Deck") {
+    return <FontAwesome name={'plus-square'} size={size} color={color} />
   }
-})
+}
+
+const TabNavigatorConfig = {
+  navigationOptions: {
+    header: null
+  },
+  tabBarOptions: {
+    activeTintColor: colors.blue,
+    inactiveTintColor: colors.grey,
+    showIcon: true
+  }
+}
+
+const MainNav = () => {
+  return (
+    <Tab.Navigator {...TabNavigatorConfig}>
+      <Tab.Screen
+        name="Decks"
+        component={DeckList}
+        options={{
+          tabBarIcon: ({ focused, color, size }) => (tabIcon('Decks', color, 25)),
+          title: 'Decks'
+        }}
+      />
+      <Tab.Screen
+        name="Add Deck"
+        component={CreateDeck}
+        options={{
+          tabBarIcon: ({ focused, color, size }) => (tabIcon('Add Deck', color, 25)),
+          title: 'Add Deck'
+        }}
+      />
+    </Tab.Navigator>
+  )
+}
+
+export default function App() {
+  return (
+    <View style={{ flex: 1 }}>
+      <AppStatusBar backgroundColor={colors.blue} barStyle='light-content' />
+      <NavigationContainer>
+        <MainNav />
+      </NavigationContainer>
+    </View>
+  )
+}

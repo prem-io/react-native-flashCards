@@ -3,12 +3,14 @@ import { View, Text, StyleSheet } from 'react-native'
 import * as colors from '../utils/colors'
 import Button from './Button'
 
-function DeckCard() {
+function DeckCard({ deck, navigateToDeck }) {
+  const { title, questions } = deck
+
   return (
     <View style={styles.card}>
-      <Text style={styles.title}>React</Text>
-      <Text style={styles.count}>{5} Cards</Text>
-      <Button onPress={() => console.log('View Deck')}>View Deck</Button>
+      <Text style={styles.title}>{title}</Text>
+      <Text style={styles.count}>{questions.length} Cards</Text>
+      <Button onPress={() => navigateToDeck(deck.title)}>View Deck</Button>
     </View>
   )
 }
@@ -16,21 +18,14 @@ function DeckCard() {
 const styles = StyleSheet.create({
   card: {
     backgroundColor: colors.white,
-    borderRadius: 10,
+    borderRadius: 8,
     padding: 20,
-    marginLeft: 40,
-    marginRight: 40,
-    marginBottom: 40,
-    alignSelf: "stretch",
+    marginBottom: 30,
     alignItems: 'center',
     shadowRadius: 3,
-    shadowOpacity: 0.95,
-    elevation: 25,
-    shadowColor: 'rgba(0,0,0,0.8)',
-    shadowOffset: {
-      width: 0,
-      height: 3
-    }
+    shadowOpacity: 0.8,
+    shadowColor: 'rgba(0, 0, 0, 0.4)',
+    shadowOffset: { width: 0, height: 3 }
   },
   title: {
     fontSize: 22,
@@ -38,8 +33,7 @@ const styles = StyleSheet.create({
     color: colors.black,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginBottom: 5,
-    letterSpacing: 1
+    marginBottom: 5
   },
   count: {
     fontSize: 16,
