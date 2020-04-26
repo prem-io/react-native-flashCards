@@ -29,13 +29,13 @@ git clone https://github.com/prem-io/react-native-flashCards.git
 cd react-native-flashCards
 ```
 
-- install all project dependencies with `npm install` or `yarn install`
+- Install all project dependencies with `npm install` or `yarn install`
 
 ## Running the application
 
 To run the application on your Android device, download the Expo app from the Google Play Store and scan the QR code which is displayed in the command like window after running
 
-- start the development server with `npm start` or `yarn start` or `expo start`
+- Start the development server with `npm start` or `yarn start` or `expo start`
 
 Also make sure you have the Expo-cli tool installed on your system for a smooth running/testing of this app.
 
