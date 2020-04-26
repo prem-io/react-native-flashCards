@@ -4252,14 +4252,6 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@15.5.10:
-  version "15.5.10"
-  resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.5.10.tgz#2797dfc3126182e3a95e3dfbb2e893ddd7456154"
-  integrity sha1-J5ffwxJhguOpXj37suiT3ddFYVQ=
-  dependencies:
-    fbjs "^0.8.9"
-    loose-envify "^1.3.1"
-
 prop-types@^15.5.10, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
@@ -4306,11 +4298,6 @@ range-parser@~1.2.1:
   resolved "https://registry.yarnpkg.com/range-parser/-/range-parser-1.2.1.tgz#3cf37023d199e1c24d1a55b84800c2f3e6468031"
   integrity sha512-Hrgsx+orqoygnmhFbKaHE6c296J+HTAQXoxEF6gNupROmmGJRoyzfG3ccAveqCBrwr/2yxQ5BVd/GTl5agOwSg==
 
-react-card-flip@^1.0.10:
-  version "1.0.10"
-  resolved "https://registry.yarnpkg.com/react-card-flip/-/react-card-flip-1.0.10.tgz#f3eab968f2cba6de6eccb84cf73bcaf6b53fb974"
-  integrity sha512-BqK6PmP+L/xmcH1AoMuirbxRuDIiaNy3r8734GJQqEyIWoW8L4j2c/di6mbNg+I2rGue3tLH1I9QbJLd7M89ww==
-
 react-devtools-core@^3.6.3:
   version "3.6.3"
   resolved "https://registry.yarnpkg.com/react-devtools-core/-/react-devtools-core-3.6.3.tgz#977d95b684c6ad28205f0c62e1e12c5f16675814"
@@ -4333,19 +4320,6 @@ react-is@^16.12.0, react-is@^16.13.0, react-is@^16.8.1, react-is@^16.8.4:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
-
-react-lifecycles-compat@^3.0.4:
-  version "3.0.4"
-  resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
-  integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
-
-react-native-card-flip@^1.0.6:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/react-native-card-flip/-/react-native-card-flip-1.0.6.tgz#fdb833f70715de37e05f56ea3678cb6e5d9028f2"
-  integrity sha512-+T+vaTi1JzPpYvacprYJ4ofFdqcYYELMkh4GwnYrDZr/yHJqPu8cfABovbYaEiCuX4MM4NYynMN9+Z6Kk7y0AA==
-  dependencies:
-    prop-types "15.5.10"
-    react-lifecycles-compat "^3.0.4"
 
 react-native-flip-card@^3.5.5:
   version "3.5.5"

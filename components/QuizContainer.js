@@ -6,6 +6,7 @@ import Button from './Button'
 import NoCards from './NoCards'
 import Results from './Results'
 import { getDeck } from '../utils/api'
+import { setLocalNotification, clearLocalNotification } from '../utils/helper'
 
 export default class QuizContainer extends Component {
   state = {
@@ -38,6 +39,8 @@ export default class QuizContainer extends Component {
     }
     if (currentQuestion === totalQuestions - 1) {
       this.setState({ showResults: true })
+      clearLocalNotification()
+        .then(setLocalNotification)
     } else {
       this.setState((prevState) => ({
         currentQuestion: prevState.currentQuestion + 1,
@@ -51,6 +54,9 @@ export default class QuizContainer extends Component {
       correctAnswers: 0,
       showResults: false
     })
+
+    clearLocalNotification()
+      .then(setLocalNotification)
   }
 
   goBack = () => this.props.navigation.goBack();
@@ -96,7 +102,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     margin: 10,
-    backgroundColor: colors.white,
+    backgroundColor: colors.bg,
     alignItems: 'center'
   },
   quizProgress: {

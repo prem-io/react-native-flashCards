@@ -1,21 +1,19 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { View, StatusBar } from 'react-native'
 import Constants from 'expo-constants'
 import * as colors from './utils/colors'
-import { FontAwesome, FontAwesome5 } from '@expo/vector-icons'
 
+import { FontAwesome, FontAwesome5 } from '@expo/vector-icons'
 import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import { createStackNavigator } from '@react-navigation/stack'
+import { setLocalNotification } from './utils/helper'
 
 import DeckList from './components/DeckList'
 import CreateDeck from './components/CreateDeck'
-import DeckCard from './components/DeckCard'
 import AddQue from './components/AddQue'
-import QueCard from './components/QueCard'
 import QueList from './components/QueList'
-import QuizCard from './components/QuizCard'
 import QuizContainer from './components/QuizContainer'
 
 function AppStatusBar({ backgroundColor, ...props }) {
@@ -126,13 +124,19 @@ const MainStackNav = () => {
   )
 }
 
-export default function App() {
-  return (
-    <View style={{ flex: 1 }}>
-      <AppStatusBar backgroundColor={colors.blue} barStyle='light-content' />
-      <NavigationContainer>
-        <MainStackNav />
-      </NavigationContainer>
-    </View>
-  )
+export default class App extends Component {
+  componentDidMount() {
+    setLocalNotification()
+  }
+
+  render() {
+    return (
+      <View style={{ flex: 1 }}>
+        <AppStatusBar backgroundColor={colors.blue} barStyle='light-content' />
+        <NavigationContainer>
+          <MainStackNav />
+        </NavigationContainer>
+      </View>
+    )
+  }
 }

@@ -34,7 +34,7 @@ export default class DeckList extends Component {
         style={styles.container}
         data={Object.values(this.state.deckList)}
         keyExtractor={this._keyExtractor}
-        renderItem={({ item }) => <DeckCard deck={item} navigateToDeck={this.navigateToDeck} />}
+        renderItem={({ item, index }) => <DeckCard deck={item} indx={index} navigateToDeck={this.navigateToDeck} />}
       />
     )
   }
@@ -43,7 +43,6 @@ export default class DeckList extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.green,
-    padding: 30
+    backgroundColor: colors.bg,
   }
 })

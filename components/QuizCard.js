@@ -3,7 +3,6 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import * as colors from '../utils/colors'
 import Icon from 'react-native-vector-icons/AntDesign'
 import FlipCard from 'react-native-flip-card'
-import Button from './Button'
 
 export default class QuizCard extends Component {
   state = {

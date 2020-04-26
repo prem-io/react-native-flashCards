@@ -4,7 +4,6 @@ import * as colors from '../utils/colors'
 import Button from './Button'
 
 const NoCards = ({ goBack, noCards }) => {
-  console.log(noCards)
   return (
     <View style={styles.container}>
       <Image style={{ width: 300, height: 300 }} source={require('../assets/noCard.jpeg')} />
