@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: colors.bg
+    backgroundColor: colors.white
   },
   floatBtn: {
     alignItems: 'center',

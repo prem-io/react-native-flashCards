@@ -5,32 +5,30 @@ import Icon from 'react-native-vector-icons/AntDesign'
 import FlipCard from 'react-native-flip-card'
 
 export default class QuizCard extends Component {
-  state = {
-    flip: false
-  }
-
   render() {
-    const { quiz: { question, answer } } = this.props
+    const { quiz: { question, answer }, flip, flipCard } = this.props
     return (
       <FlipCard
         friction={6}
         perspective={1000}
         flipHorizontal={true}
         flipVertical={false}
-        flip={this.state.flip}
+        flip={flip}
         clickable={false}
       >
         {/* Face Side */}
         <View style={[styles.card]}>
+          <Text style={{ alignSelf: 'center' }}>Question</Text>
           <Text style={styles.title} numberOfLines={7}>{question}</Text>
-          <TouchableOpacity style={styles.icon} onPress={() => this.setState({ flip: !this.state.flip })}>
+          <TouchableOpacity style={styles.icon} onPress={flipCard}>
             <Icon name="arrowright" size={25} color={colors.grey} />
           </TouchableOpacity>
         </View>
         {/* Back Side */}
         <View style={[styles.card]}>
+          <Text style={{ alignSelf: 'center' }}>Answer</Text>
           <Text style={styles.title} numberOfLines={7}>{answer}</Text>
-          <TouchableOpacity style={styles.icon} onPress={() => this.setState({ flip: !this.state.flip })}>
+          <TouchableOpacity style={styles.icon} onPress={flipCard}>
             <Icon name="arrowright" size={25} color={colors.grey} />
           </TouchableOpacity>
         </View>

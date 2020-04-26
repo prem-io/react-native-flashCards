@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, StatusBar } from 'react-native'
+import { View, StatusBar, AsyncStorage } from 'react-native'
 import Constants from 'expo-constants'
 import * as colors from './utils/colors'
 
@@ -126,6 +126,7 @@ const MainStackNav = () => {
 
 export default class App extends Component {
   componentDidMount() {
+    // AsyncStorage.clear()
     setLocalNotification()
   }
 

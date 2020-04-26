@@ -15,6 +15,7 @@ export default class QuizContainer extends Component {
     currentQuestion: 0,
     correctAnswers: 0,
     showResults: false,
+    flip: false,
     loader: true
   }
 
@@ -35,6 +36,7 @@ export default class QuizContainer extends Component {
     if (answer === 'correct') {
       this.setState((prevState) => ({
         correctAnswers: prevState.correctAnswers + 1,
+        flip: false
       }))
     }
     if (currentQuestion === totalQuestions - 1) {
@@ -59,10 +61,14 @@ export default class QuizContainer extends Component {
       .then(setLocalNotification)
   }
 
+  flipCard = () => {
+    this.setState({ flip: !this.state.flip })
+  }
+
   goBack = () => this.props.navigation.goBack();
 
   render() {
-    const { loader, questions, currentQuestion, totalQuestions, correctAnswers, showResults } = this.state
+    const { loader, questions, currentQuestion, totalQuestions, correctAnswers, showResults, flip } = this.state
     const quiz = questions[currentQuestion]
 
     if (loader) {
@@ -82,7 +88,7 @@ export default class QuizContainer extends Component {
         <View style={styles.quizProgress}>
           <Text style={styles.progressCount}>Cards: {currentQuestion + 1}/{totalQuestions}</Text>
         </View>
-        <QuizCard quiz={quiz} />
+        <QuizCard quiz={quiz} flip={flip} flipCard={this.flipCard} />
         <Button
           style={{ width: 200, backgroundColor: colors.green }}
           onPress={() => this.markAnswer('correct')}>
@@ -101,8 +107,8 @@ export default class QuizContainer extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    margin: 10,
-    backgroundColor: colors.bg,
+    padding: 20,
+    backgroundColor: colors.white,
     alignItems: 'center'
   },
   quizProgress: {
