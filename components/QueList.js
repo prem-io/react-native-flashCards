@@ -1,37 +1,49 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, ActivityIndicator } from 'react-native'
 import QueCard from './QueCard'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import * as colors from '../utils/colors'
 import Button from './Button'
-
+import { getDeck } from '../utils/api'
 export default class QueList extends Component {
+  state = {
+    questions: []
+  }
+
+  componentDidMount() {
+    const { deck: { title } } = this.props.route.params
+    getDeck(title)
+      .then(res => this.setState({ questions: res.questions }))
+  }
+
+  componentDidUpdate(prevProps) {
+    const { deck: { title } } = this.props.route.params
+    prevProps.navigation.addListener('focus', () => {
+      getDeck(title)
+        .then(res => this.setState({ questions: res.questions }))
+    })
+  }
 
   updateScreenTitle = (title) => {
     this.props.navigation.setOptions({ title })
   }
 
-  addCard = () => {
-    const { deck } = this.props.route.params
-    console.log(deck)
-    // this.props.navigation.navigate('QueList', { deck })
-  }
-
   navigate = (screen) => {
-    const { deck: { questions } } = this.props.route.params
-    this.props.navigation.navigate(screen, { questions })
+    const { deck: { title, questions } } = this.props.route.params
+    this.props.navigation.navigate(screen, { title, questions })
   }
 
   render() {
-    const { deck: { title, questions } } = this.props.route.params
+    const { deck: { title } } = this.props.route.params
+    const { questions } = this.state
     this.updateScreenTitle(title)
 
     return (
       <View style={styles.container}>
         <FlatList
           data={questions}
-          keyExtractor={(item, index) => 'key' + index}
-          renderItem={({ item }) => <QueCard que={item} />}
+          keyExtractor={(_item, index) => 'key' + index}
+          renderItem={({ item, index }) => <QueCard que={item} indx={index} />}
         />
         <Button
           style={{ width: 150, marginBottom: 15 }}
@@ -53,8 +65,8 @@ export default class QueList extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 30,
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: colors.white
   },
   floatBtn: {
     alignItems: 'center',

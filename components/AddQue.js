@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, TextInput, TouchableWithoutFeedback, Keyboard } from 'react-native'
+import { StyleSheet, View, TextInput, TouchableWithoutFeedback, Keyboard, AsyncStorage } from 'react-native'
 import Button from './Button'
 import * as colors from '../utils/colors'
+import { addCardToDeck, getDecks } from '../utils/api'
 
 export default class AddQue extends Component {
   state = {
@@ -11,6 +12,17 @@ export default class AddQue extends Component {
 
   handleChangeText = (name, text) => {
     this.setState({ [name]: text })
+  }
+
+  handleSubmit = () => {
+    const { question, answer } = this.state
+    const { title } = this.props.route.params
+    const card = { question, answer }
+    addCardToDeck(title, card)
+      .then(_res => {
+        this.setState({ question: '', answer: '' }) // reset the state
+        this.props.navigation.navigate('QueList')
+      })
   }
 
   render() {
@@ -34,7 +46,7 @@ export default class AddQue extends Component {
             placeholderTextColor={colors.disable}
           />
           <Button
-            onPress={() => console.log('Create Card')}
+            onPress={this.handleSubmit}
             disable={disable ? false : true}
             style={styles.btn}
           >Create Card</Button>

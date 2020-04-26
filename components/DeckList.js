@@ -13,6 +13,13 @@ export default class DeckList extends Component {
     getDecks().then(res => this.setState({ deckList: res }))
   }
 
+  componentDidUpdate(prevProps) {
+    prevProps.navigation.addListener('focus', () => {
+      getDecks()
+        .then(res => this.setState({ deckList: res }))
+    })
+  }
+
   //Extracting item key for FlatList rendering
   _keyExtractor = (item, index) => (index.toString());
 

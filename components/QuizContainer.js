@@ -1,18 +1,32 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View } from 'react-native'
+import { Text, StyleSheet, View, ActivityIndicator } from 'react-native'
 import * as colors from '../utils/colors'
 import QuizCard from './QuizCard'
 import Button from './Button'
 import NoCards from './NoCards'
 import Results from './Results'
+import { getDeck } from '../utils/api'
 
 export default class QuizContainer extends Component {
   state = {
-    questions: this.props.route.params.questions,
-    totalQuestions: this.props.route.params.questions.length,
+    questions: [],
+    totalQuestions: 0,
     currentQuestion: 0,
     correctAnswers: 0,
-    showResults: false
+    showResults: false,
+    loader: true
+  }
+
+  componentDidMount() {
+    const { title } = this.props.route.params
+    getDeck(title)
+      .then(res => {
+        this.setState({
+          questions: res.questions,
+          totalQuestions: res.questions.length,
+          loader: false
+        })
+      })
   }
 
   markAnswer = (answer) => {
@@ -42,8 +56,12 @@ export default class QuizContainer extends Component {
   goBack = () => this.props.navigation.goBack();
 
   render() {
-    const { questions, currentQuestion, totalQuestions, correctAnswers, showResults } = this.state
+    const { loader, questions, currentQuestion, totalQuestions, correctAnswers, showResults } = this.state
     const quiz = questions[currentQuestion]
+
+    if (loader) {
+      return <ActivityIndicator style={{ flex: 1 }} />
+    }
 
     if (totalQuestions === 0) {
       return <NoCards goBack={this.goBack} />
