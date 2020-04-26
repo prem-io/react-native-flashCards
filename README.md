@@ -29,7 +29,8 @@ git clone https://github.com/prem-io/react-native-flashCards.git
 cd react-native-flashCards
 ```
 
-- Install all project dependencies with `npm install` or `yarn install`
+- Install all project dependencies with
+  `npm install` or `yarn install`
 
 ## Running the application
 
