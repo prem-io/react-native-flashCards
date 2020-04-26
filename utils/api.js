@@ -54,10 +54,10 @@ export function getDeck(title) {
 
 // helper function to save new deck
 export function saveDeckTitle(title) {
-  const deckObj = { title, questions: [] }
-  return AsyncStorage.mergeItem(STORAGE_DB_KEY, JSON.stringify({
-    [title]: deckObj
-  }))
+  const formBody = {
+    [title]: { title, questions: [] }
+  }
+  return AsyncStorage.mergeItem(STORAGE_DB_KEY, JSON.stringify(formBody))
 }
 
 // helper function to add a new card

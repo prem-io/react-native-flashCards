@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { StyleSheet, View, TextInput, TouchableWithoutFeedback, Keyboard, AsyncStorage } from 'react-native'
 import Button from './Button'
 import * as colors from '../utils/colors'
-import { addCardToDeck, getDecks } from '../utils/api'
+import { addCardToDeck } from '../utils/api'
 
 export default class AddQue extends Component {
   state = {

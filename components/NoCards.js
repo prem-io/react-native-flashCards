@@ -3,12 +3,16 @@ import { StyleSheet, Text, View, Image } from 'react-native'
 import * as colors from '../utils/colors'
 import Button from './Button'
 
-const NoCards = ({ goBack }) => {
+const NoCards = ({ goBack, noCards }) => {
+  console.log(noCards)
   return (
     <View style={styles.container}>
       <Image style={{ width: 300, height: 300 }} source={require('../assets/noCard.jpeg')} />
-      <Text style={styles.text}>Sorry, you cannot take a quiz because there are no cards in the deck.</Text>
-      <Button style={{ backgroundColor: colors.white, color: colors.grey }} onPress={goBack}>Back</Button>
+      {noCards
+        ? <Text style={styles.text}>You're Deck is Empty.{'\n'}Create some quiz cards.</Text>
+        : <Text style={styles.text}>Sorry, you cannot take a quiz because there are no cards in the deck.</Text>
+      }
+      {!noCards && <Button style={{ backgroundColor: colors.white, color: colors.grey }} onPress={goBack}>Back</Button>}
     </View>
   )
 }
@@ -28,6 +32,7 @@ const styles = StyleSheet.create({
     color: colors.grey,
     textAlign: 'center',
     lineHeight: 30,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    alignSelf: 'stretch'
   }
 })

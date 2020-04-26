@@ -7,7 +7,7 @@ const QueCard = ({ que: { question }, indx }) => {
   return (
     <View style={[styles.card, { marginTop: (indx !== 0 ? 0 : 30) }]}>
       <View style={[styles.ribbon, { backgroundColor: ribColor() }]}></View>
-      <Text style={styles.question} numberOfLines={2}>{question}</Text>
+      <Text style={{ fontSize: 18 }} numberOfLines={2}>{question}</Text>
     </View>
   )
 }
@@ -34,8 +34,5 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 15,
     left: 0
-  },
-  question: {
-    fontSize: 18
   }
 })

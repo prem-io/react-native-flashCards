@@ -64,7 +64,7 @@ export default class QuizContainer extends Component {
     }
 
     if (totalQuestions === 0) {
-      return <NoCards goBack={this.goBack} />
+      return <NoCards goBack={this.goBack} noCards={false} />
     }
 
     if (showResults) {

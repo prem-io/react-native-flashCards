@@ -5,22 +5,24 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import * as colors from '../utils/colors'
 import Button from './Button'
 import { getDeck } from '../utils/api'
+import NoCards from './NoCards'
 export default class QueList extends Component {
   state = {
-    questions: []
+    questions: [],
+    loader: true
   }
 
   componentDidMount() {
     const { deck: { title } } = this.props.route.params
     getDeck(title)
-      .then(res => this.setState({ questions: res.questions }))
+      .then(res => this.setState({ questions: res.questions, loader: false }))
   }
 
   componentDidUpdate(prevProps) {
     const { deck: { title } } = this.props.route.params
     prevProps.navigation.addListener('focus', () => {
       getDeck(title)
-        .then(res => this.setState({ questions: res.questions }))
+        .then(res => this.setState({ questions: res.questions, loader: false }))
     })
   }
 
@@ -29,7 +31,8 @@ export default class QueList extends Component {
   }
 
   navigate = (screen) => {
-    const { deck: { title, questions } } = this.props.route.params
+    const { deck: { title } } = this.props.route.params
+    const { questions } = this.state
     this.props.navigation.navigate(screen, { title, questions })
   }
 
@@ -37,14 +40,19 @@ export default class QueList extends Component {
     const { deck: { title } } = this.props.route.params
     const { questions } = this.state
     this.updateScreenTitle(title)
+    if (this.state.loader) {
+      return <ActivityIndicator />
+    }
 
     return (
       <View style={styles.container}>
-        <FlatList
-          data={questions}
-          keyExtractor={(_item, index) => 'key' + index}
-          renderItem={({ item, index }) => <QueCard que={item} indx={index} />}
-        />
+        {questions.length > 0
+          ? <FlatList
+            data={questions}
+            keyExtractor={(_item, index) => 'key' + index}
+            renderItem={({ item, index }) => <QueCard que={item} indx={index} />}
+            style={{ width: '100%' }} />
+          : <NoCards noCards={true} />}
         <Button
           style={{ width: 150, marginBottom: 15 }}
           onPress={() => this.navigate('Quiz')}

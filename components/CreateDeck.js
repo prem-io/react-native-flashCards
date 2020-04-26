@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Text, StyleSheet, View, TextInput, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import * as colors from '../utils/colors'
 import Button from './Button'
+import { saveDeckTitle } from '../utils/api'
 
 export default class CreateDeck extends Component {
   state = {
@@ -10,6 +11,17 @@ export default class CreateDeck extends Component {
 
   handleChangeText = (title) => {
     this.setState({ title })
+  }
+
+  handleSubmit = () => {
+    const { title } = this.state
+    saveDeckTitle(title)
+    this.props.navigation.navigate('QueList', {
+      deck: {
+        title: this.state.title,
+      }
+    })
+    this.setState({ title: '' })
   }
 
   render() {
@@ -27,7 +39,7 @@ export default class CreateDeck extends Component {
               maxLength={15}
             />
             <Text style={styles.charCount}>{title.length}/15</Text>
-            <Button disable={title.length > 0 ? false : true} onPress={() => console.log('Create Deck')}>Create</Button>
+            <Button disable={title.length > 0 ? false : true} onPress={this.handleSubmit}>Create</Button>
           </View>
         </View>
       </TouchableWithoutFeedback>
@@ -38,7 +50,8 @@ export default class CreateDeck extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    paddingHorizontal: 30
   },
   card: {
     backgroundColor: colors.white,
@@ -55,7 +68,7 @@ const styles = StyleSheet.create({
     }
   },
   input: {
-    width: 280,
+    width: '100%',
     height: 45,
     padding: 5,
     fontSize: 18,
