@@ -24,8 +24,10 @@ This application was built using [Expo](https://expo.io/) tool called 'create-re
 
 ## Installation Procedure
 
-`git clone https://github.com/prem-io/react-native-flashCards.git`
-`cd react-native-flashCards`
+```bash
+git clone https://github.com/prem-io/react-native-flashCards.git
+cd react-native-flashCards
+```
 
 - install all project dependencies with `npm install` or `yarn install`
 
